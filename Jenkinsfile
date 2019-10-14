@@ -1,7 +1,4 @@
 node{
-    stage('SCM checkout'){
-        git 'https://github.com/HemkantG/NodeRestService.git'
-    }
     stage('Build Docker Image'){
         sh 'docker build -t hemkant0007/my-node-service:1.0.0 .'
     }
