@@ -13,7 +13,9 @@ node{
 
     }
     stage('Run the container on the dev server'){
-        sh "docker stop my-node-service || true && docker rm my-node-service || true"
-        sh 'docker run -p 3000:3000 --name my-node-service -d hemkant0007/my-node-service:1.0.0'
+         def dockerRun = 'docker run -p 3000:3000 --name my-node-service -d hemkant0007/my-node-service:1.0.0'
+         sshagent (credentials: ['ssh-creds']) {
+             sh "ssh -o StrictHostKeyChecking=no -l espladmin@192.168.101.222 ${dockerRun}"
+         }
     }
 }
